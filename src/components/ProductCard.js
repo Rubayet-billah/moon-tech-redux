@@ -34,25 +34,32 @@ const ProductCard = ({ product }) => {
         </ul>
       </div>
       <div className="flex gap-2 mt-5">
-        <button
-          onClick={() => dispatch(addToCart(product))}
-          className="bg-indigo-500 rounded-full py-1 px-2 flex-1 text-white text-bold"
-        >
-          Add to cart
-        </button>
-        <button
-          title="Add to wishlist"
-          className="bg-indigo-500  py-1 px-2 rounded-full"
-        >
-          <BiListPlus className="text-white" />
-        </button>
-        <button
-          title="Add to wishlist"
-          onClick={() => dispatch(removeFromCart(product))}
-          className="bg-red-500  py-1 px-2 rounded-full"
-        >
-          <BiTrash className="text-white" />
-        </button>
+        {!pathname.includes("cart") && (
+          <button
+            onClick={() => dispatch(addToCart(product))}
+            className="bg-indigo-500 rounded-full py-1 px-2 flex-1 text-white text-bold"
+          >
+            Add to cart
+          </button>
+        )}
+        {!pathname.includes("cart") && (
+          <button
+            title="Add to wishlist"
+            className="bg-indigo-500  py-1 px-2 rounded-full"
+          >
+            <BiListPlus className="text-white" />
+          </button>
+        )}
+        {pathname.includes("cart") && (
+          <button
+            title="Delete"
+            onClick={() => dispatch(removeFromCart(product))}
+            className="bg-pink-500 flex-1  py-2 px-2 rounded-full text-white flex justify-center items-center"
+          >
+            <BiTrash className="text-white text-lg mr-2" />
+            Remove
+          </button>
+        )}
       </div>
     </div>
   );

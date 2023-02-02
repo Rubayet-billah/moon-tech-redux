@@ -1,11 +1,17 @@
 import React from "react";
-import { BiListPlus } from "react-icons/bi";
+import { BiListPlus, BiTrash } from "react-icons/bi";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../redux/actionCreators/productActions";
-import { ADD_TO_CART } from "../redux/actionTypes/actionTypes";
+import { useLocation } from "react-router-dom";
+import {
+  addToCart,
+  removeFromCart,
+} from "../redux/actionCreators/productActions";
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
+
+  const { pathname } = useLocation();
+  console.log(pathname);
   return (
     <div
       className="shadow-lg rounded-3xl border  p-3 flex flex-col text-indigo-900"
@@ -39,6 +45,13 @@ const ProductCard = ({ product }) => {
           className="bg-indigo-500  py-1 px-2 rounded-full"
         >
           <BiListPlus className="text-white" />
+        </button>
+        <button
+          title="Add to wishlist"
+          onClick={() => dispatch(removeFromCart(product))}
+          className="bg-red-500  py-1 px-2 rounded-full"
+        >
+          <BiTrash className="text-white" />
         </button>
       </div>
     </div>
